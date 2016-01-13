@@ -30,9 +30,16 @@ public class BandColorScript : MonoBehaviour
 
 	public void Right()
 	{
-		materialIndex =  Mathf.Abs ((materialIndex + 1) % bandColors.Count);
-		this.GetComponent<MeshRenderer>().material = bandColors [materialIndex];
+		if(materialIndex == bandColors.Count -1)
+		{
+			materialIndex = 0;
+		}
+		else
+		{
+			materialIndex =  Mathf.Abs ((materialIndex + 1) % bandColors.Count);
+		}
 
+		this.GetComponent<MeshRenderer>().material = bandColors [materialIndex];
 		bandValue = GetBandValue (bandNumber, materialIndex);
 
 	}
@@ -58,6 +65,10 @@ public class BandColorScript : MonoBehaviour
 			case 1:
 				return index * 10;
 			case 2:
+				if(index == 0)
+				{
+					return 0;
+				}
 				return index-1;
 			case 3:
 				if(index == 0)
